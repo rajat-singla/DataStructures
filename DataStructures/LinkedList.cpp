@@ -78,6 +78,65 @@ void insertAtMiddle(node*&head,int data,int position)
 }
 //end of insertion functions
 
+
+//deletion functions
+void deleteAtHead(node*&head)
+{
+    if(head==NULL)
+    {
+        return;
+    }
+    node* temp = head;
+    head=head->next;
+    delete temp;
+}
+
+void deleteAtTail(node*&head)
+{
+    if(head==NULL)
+    {
+        return;
+    }
+    node*prev=NULL;
+    node*temp=head;
+
+    while(temp->next!=NULL)
+    {
+        prev=temp;
+        temp=temp->next;
+    }
+    prev->next=NULL;
+    delete temp;
+}
+void deleteAtMiddle(node*&head,int position)
+{
+    if(head==NULL||position==0)
+    {
+        return;
+    }
+    if(position==1)
+    {
+        deleteAtHead(head);
+        return;
+    }
+    if(position>length(head))
+    {
+        deleteAtTail(head);
+        return;
+    }
+    node*temp=head;
+    node*prev =NULL;
+    while(position-1&&temp->next!=NULL)
+    {
+        prev=temp;
+        temp=temp->next;
+        position--;
+    }
+    prev->next=temp->next;
+    delete temp;
+}
+//end of deletion functions
+
 void buildList(node*&head)
 {
     int data;
@@ -107,9 +166,16 @@ int main()
     buildList(head);
     print(head);
 
+    cout<<"Testing Insertion Functions"<<endl;
     insertAtHead(head,10);
     insertAtMiddle(head,10,7);
     insertAtTail(head,11);
+    print(head);
+
+    cout<<"Testing Deletion Functions"<<endl;
+    deleteAtHead(head);
+    deleteAtMiddle(head,7);
+    deleteAtTail(head);
     print(head);
 
     return 0;
