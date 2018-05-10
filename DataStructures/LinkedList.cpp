@@ -246,6 +246,42 @@ node* reverseRecursive(node* head)
     return revHead;
 }
 //end of reversing Linked List functions
+
+//midpoint of Linked List using runner technique
+node* midPoint(node* head){
+
+    if(head==NULL||head->next==NULL){
+        return head;
+    }
+    node *slow = head;
+    node* fast = head;
+
+    while(fast!=NULL&&fast->next!=NULL){
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+    return slow;
+}
+
+//kth Node from end of Linked List
+node* findNodeFromLast(node* head,int k){
+    if(k>length(head)){
+        return NULL;
+    }
+
+    node *slow=head,*fast=head;
+    int temp=k;
+    while(temp--){
+        fast=fast->next;
+    }
+    int len = length(head);
+    temp = len-k;
+    while(fast!=NULL){
+        fast=fast->next;
+        slow=slow->next;
+    }
+    return slow;
+}
 int main()
 {
     node* head = NULL;
@@ -253,20 +289,20 @@ int main()
     buildList(head);
     print(head);
 
-    cout<<"Testing Insertion Functions"<<endl;
-    insertAtHead(head,10);
-    insertAtMiddle(head,10,7);
-    insertAtTail(head,11);
-    print(head);
+    //    cout<<"Testing Insertion Functions"<<endl;
+    //    insertAtHead(head,10);
+    //    insertAtMiddle(head,10,7);
+    //    insertAtTail(head,11);
+    //    print(head);
+    //
+    //    cout<<"Testing Deletion Functions"<<endl;
+    //    deleteAtHead(head);
+    //    deleteAtMiddle(head,7);
+    //    deleteAtTail(head);
+    //    print(head);
 
-    cout<<"Testing Deletion Functions"<<endl;
-    deleteAtHead(head);
-    deleteAtMiddle(head,7);
-    deleteAtTail(head);
-    print(head);
-
-    cout<<"Testing iterative search: "<<searchIterative(head,5)<<endl;
-    cout<<"Testing recursive search: "<<searchRecursive(head,9)<<endl;
+    //    cout<<"Testing iterative search: "<<searchIterative(head,5)<<endl;
+    //    cout<<"Testing recursive search: "<<searchRecursive(head,9)<<endl;
 
     /*head=NULL;
     cout<<"Testing operator overloading"<<endl;
@@ -277,8 +313,14 @@ int main()
 
     // cout<<"Testing iterative reverse"<<endl;
     // print(reverseIterative(head));
-    cout<<"Testing recursive reverse"<<endl;
-    print(reverseRecursive(head));
+    //cout<<"Testing recursive reverse"<<endl;
+    //print(reverseRecursive(head));
+
+    cout<<"Testing midPoint"<<endl;
+    cout<<midPoint(head)->data<<endl;
+
+    cout<<"Testing Kth node from last: k=2"<<endl;
+    cout<<findNodeFromLast(head,2)->data<<endl;
 
     return 0;
 }
