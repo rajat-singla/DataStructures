@@ -137,6 +137,38 @@ void deleteAtMiddle(node*&head,int position)
 }
 //end of deletion functions
 
+//search functions
+bool searchRecursive(node*head,int key)
+{
+    if(head==NULL)
+    {
+        return false;
+    }
+    if(head->data==key)
+    {
+        return true;
+    }
+    else
+    {
+        return searchRecursive(head->next,key);
+    }
+}
+
+bool searchIterative(node* head, int key)
+{
+
+    while(head!=NULL)
+    {
+        if(head->data==key)
+        {
+            return true;
+        }
+        head=head->next;
+    }
+    return false;
+}
+//end of search functions
+
 void buildList(node*&head)
 {
     int data;
@@ -177,6 +209,9 @@ int main()
     deleteAtMiddle(head,7);
     deleteAtTail(head);
     print(head);
+
+    cout<<"Testing iterative search: "<<searchIterative(head,5)<<endl;
+    cout<<"Testing recursive search: "<<searchRecursive(head,9)<<endl;
 
     return 0;
 }
