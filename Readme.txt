@@ -1,0 +1,1 @@
+This project contains the code that I have written while learning data structures in c++. Also, this is my first project on GitHub.
