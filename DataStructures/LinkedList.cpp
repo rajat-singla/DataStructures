@@ -248,15 +248,17 @@ node* reverseRecursive(node* head)
 //end of reversing Linked List functions
 
 //midpoint of Linked List using runner technique
-node* midPoint(node* head){
-
-    if(head==NULL||head->next==NULL){
+node* midPoint(node* head)
+{
+    if(head==NULL||head->next==NULL)
+    {
         return head;
     }
     node *slow = head;
-    node* fast = head;
+    node* fast = head->next;
 
-    while(fast!=NULL&&fast->next!=NULL){
+    while(fast!=NULL&&fast->next!=NULL)
+    {
         fast=fast->next->next;
         slow=slow->next;
     }
@@ -264,43 +266,71 @@ node* midPoint(node* head){
 }
 
 //kth Node from end of Linked List
-node* findNodeFromLast(node* head,int k){
-    if(k>length(head)){
+node* findNodeFromLast(node* head,int k)
+{
+    if(k>length(head))
+    {
         return NULL;
     }
 
     node *slow=head,*fast=head;
     int temp=k;
-    while(temp--){
+    while(temp--)
+    {
         fast=fast->next;
     }
     int len = length(head);
     temp = len-k;
-    while(fast!=NULL){
+    while(fast!=NULL)
+    {
         fast=fast->next;
         slow=slow->next;
     }
     return slow;
 }
 
-node* mergeSortedLists(node* a, node* b){
-
-    if(a==NULL){
+node* mergeSortedLists(node* a, node* b)
+{
+    if(a==NULL)
+    {
         return b;
     }
-    if(b==NULL){
+    if(b==NULL)
+    {
         return a;
     }
 
-    if(a->data<b->data){
+    if(a->data<b->data)
+    {
         node* c = mergeSortedLists(a->next,b);
         a->next = c;
         return a;
-    }else{
+    }
+    else
+    {
         node* c = mergeSortedLists(a,b->next);
         b->next = c;
         return b;
     }
+}
+
+node* mergeSort(node* head)
+{
+    if(head==NULL||head->next==NULL)
+    {
+        return head;
+    }
+    node* mid = midPoint(head);
+
+    node *a = head;
+    node *b = mid->next;
+    mid->next = NULL;
+
+    a = mergeSort(a);
+    b = mergeSort(b);
+    node* c = mergeSortedLists(a,b);
+
+    return c;
 }
 int main()
 {
@@ -324,17 +354,17 @@ int main()
     //    cout<<"Testing iterative search: "<<searchIterative(head,5)<<endl;
     //    cout<<"Testing recursive search: "<<searchRecursive(head,9)<<endl;
 
-    /*head=NULL;
-    cout<<"Testing operator overloading"<<endl;
-    cout<<"-->Enter List"<<endl;
-    cin>>head;
-    cout<<"-->Entered List"<<endl;
-    cout<<head;*/
+    //    head=NULL;
+    //    cout<<"Testing operator overloading"<<endl;
+    //    cout<<"-->Enter List"<<endl;
+    //    cin>>head;
+    //    cout<<"-->Entered List"<<endl;
+    //    cout<<head;
 
-    // cout<<"Testing iterative reverse"<<endl;
-    // print(reverseIterative(head));
-    //cout<<"Testing recursive reverse"<<endl;
-    //print(reverseRecursive(head));
+    //    cout<<"Testing iterative reverse"<<endl;
+    //    print(reverseIterative(head));
+    //    cout<<"Testing recursive reverse"<<endl;
+    //    print(reverseRecursive(head));
 
     //    cout<<"Testing midPoint"<<endl;
     //    cout<<midPoint(head)->data<<endl;
@@ -342,12 +372,16 @@ int main()
     //    cout<<"Testing Kth node from last: k=2"<<endl;
     //    cout<<findNodeFromLast(head,2)->data<<endl;
 
-    node *a=NULL,*b=NULL;
-    cin>>a>>b;
-    cout<<"List1: "<<a<<endl<<"List2: "<<b<<endl;
-    node*c= mergeSortedLists(a,b);
-    cout<<"Testing merging of two sorted lists:"<<endl<<c<<endl;
-
+    //    node *a=NULL,*b=NULL;
+    //    cin>>a>>b;
+    //    cout<<"List1: "<<a<<endl<<"List2: "<<b<<endl;
+    //    node*c= mergeSortedLists(a,b);
+    //    cout<<"Testing merging of two sorted lists:"<<endl<<c<<endl;
+    node* head = NULL;
+    buildList(head);
+    print(head);
+    node* c = mergeSort(head);
+    cout<<"Testing merge sort on linked list:"<<endl<<c<<endl;
 
     return 0;
 }
