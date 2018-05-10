@@ -177,7 +177,7 @@ void buildList(node*&head)
 
     while(data!=-1)
     {
-        insertAtHead(head,data);
+        insertAtTail(head,data);
         cin>>data;
     }
 }
@@ -208,6 +208,44 @@ ostream& operator<<(ostream& os,node*& head)
 }
 //end of printing list functions
 
+//reversing Linked List functions
+node* reverseIterative(node* head)
+{
+    if(head==NULL)
+    {
+        return NULL;
+    }
+    if(head->next==NULL)
+    {
+        return head;
+    }
+    node *prev, *curr, *next = NULL;
+    curr=head;
+
+    while(curr->next!=NULL)
+    {
+        next=curr->next;
+        curr->next = prev;
+        prev=curr;
+        curr=next;
+    }
+    curr->next=prev;
+    return curr;
+}
+
+node* reverseRecursive(node* head)
+{
+    if(head==NULL||head->next==NULL)
+    {
+        return head;
+    }
+
+    node* revHead = reverseRecursive(head->next);
+    head->next->next=head;
+    head->next = NULL;
+    return revHead;
+}
+//end of reversing Linked List functions
 int main()
 {
     node* head = NULL;
@@ -230,11 +268,17 @@ int main()
     cout<<"Testing iterative search: "<<searchIterative(head,5)<<endl;
     cout<<"Testing recursive search: "<<searchRecursive(head,9)<<endl;
 
+    /*head=NULL;
     cout<<"Testing operator overloading"<<endl;
     cout<<"-->Enter List"<<endl;
     cin>>head;
     cout<<"-->Entered List"<<endl;
-    cout<<head;
+    cout<<head;*/
+
+    // cout<<"Testing iterative reverse"<<endl;
+    // print(reverseIterative(head));
+    cout<<"Testing recursive reverse"<<endl;
+    print(reverseRecursive(head));
 
     return 0;
 }
