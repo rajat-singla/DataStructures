@@ -75,3 +75,6 @@ Thumbs.db
 *.sdf
 *.sln
 *.suo
+*.cbp
+*.depend
+*.layout
