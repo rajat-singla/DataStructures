@@ -282,12 +282,32 @@ node* findNodeFromLast(node* head,int k){
     }
     return slow;
 }
+
+node* mergeSortedLists(node* a, node* b){
+
+    if(a==NULL){
+        return b;
+    }
+    if(b==NULL){
+        return a;
+    }
+
+    if(a->data<b->data){
+        node* c = mergeSortedLists(a->next,b);
+        a->next = c;
+        return a;
+    }else{
+        node* c = mergeSortedLists(a,b->next);
+        b->next = c;
+        return b;
+    }
+}
 int main()
 {
-    node* head = NULL;
-
-    buildList(head);
-    print(head);
+    //    node* head = NULL;
+    //
+    //    buildList(head);
+    //    print(head);
 
     //    cout<<"Testing Insertion Functions"<<endl;
     //    insertAtHead(head,10);
@@ -316,11 +336,18 @@ int main()
     //cout<<"Testing recursive reverse"<<endl;
     //print(reverseRecursive(head));
 
-    cout<<"Testing midPoint"<<endl;
-    cout<<midPoint(head)->data<<endl;
+    //    cout<<"Testing midPoint"<<endl;
+    //    cout<<midPoint(head)->data<<endl;
+    //
+    //    cout<<"Testing Kth node from last: k=2"<<endl;
+    //    cout<<findNodeFromLast(head,2)->data<<endl;
 
-    cout<<"Testing Kth node from last: k=2"<<endl;
-    cout<<findNodeFromLast(head,2)->data<<endl;
+    node *a=NULL,*b=NULL;
+    cin>>a>>b;
+    cout<<"List1: "<<a<<endl<<"List2: "<<b<<endl;
+    node*c= mergeSortedLists(a,b);
+    cout<<"Testing merging of two sorted lists:"<<endl<<c<<endl;
+
 
     return 0;
 }
