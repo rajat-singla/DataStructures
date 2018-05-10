@@ -169,6 +169,7 @@ bool searchIterative(node* head, int key)
 }
 //end of search functions
 
+//building list functions
 void buildList(node*&head)
 {
     int data;
@@ -181,6 +182,15 @@ void buildList(node*&head)
     }
 }
 
+istream& operator>>(istream& is,node*& head)
+{
+    buildList(head);
+    return is;
+}
+//end of building list functions
+
+//printing list functions
+
 void print(node* head)
 {
     while(head!=NULL)
@@ -190,6 +200,13 @@ void print(node* head)
     }
     cout<<endl;
 }
+
+ostream& operator<<(ostream& os,node*& head)
+{
+    print(head);
+    return os;
+}
+//end of printing list functions
 
 int main()
 {
@@ -212,6 +229,12 @@ int main()
 
     cout<<"Testing iterative search: "<<searchIterative(head,5)<<endl;
     cout<<"Testing recursive search: "<<searchRecursive(head,9)<<endl;
+
+    cout<<"Testing operator overloading"<<endl;
+    cout<<"-->Enter List"<<endl;
+    cin>>head;
+    cout<<"-->Entered List"<<endl;
+    cout<<head;
 
     return 0;
 }
