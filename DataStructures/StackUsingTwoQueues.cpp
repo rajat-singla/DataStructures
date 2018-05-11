@@ -41,23 +41,6 @@ public:
     {
         return q1->size();
     }
-
-    void print()
-    {
-        stack<int> s;
-        queue<int>* temp = q1;
-
-        while(!temp->empty())
-        {
-            s.push(temp->front());
-            temp->pop();
-        }
-        while(!s.empty())
-        {
-            cout<<s.top()<<" ";
-            s.pop();
-        }
-    }
 };
 
 int main()
